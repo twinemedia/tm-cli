@@ -9,6 +9,11 @@ Once you have Nimble and the code, go into the code directory and run `nimble in
 # TODO
 Features that I would like to get done.
 
+## Viewing file details
+Example: `tm view abcdefghij`
+
+Would simply print out file details.
+
 ## Interactive and programmatic file editing
 Example: `tm edit abcdefghij`
 Example: `tm edit abcdefghij set --name="My File" --description="My stuff is my stuff" --tags="tag1 tag2"`
