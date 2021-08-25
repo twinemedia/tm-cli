@@ -15,8 +15,11 @@ Usage: tm <action> <arguments>
       --page=<page>: The page number
     
     "tags", "t": Searches files by tags
-      *...tags: Tags to search for (supports negative tags like "-cat")
+      *...tags: Tags to search for (supports excluding tags like "-cat")
       --page=<page>: The page number
+    
+    "delete", "d": Deletes a file
+      *id: The ID of the file to delete
     
     "configure", "c": Configures the program with an interactive wizard (if not specifying any sub-actions)
       "url": Sets the instance URL to interact with
@@ -35,8 +38,10 @@ Usage: tm <action> <arguments>
     --source=<source ID>: Overrides the configured source ID
   
   Examples:
-    tm up awesome.webm tag1 funny last_tag - Uploads "awesome.webm" with the tags "tag1, funny, last_tag"
-    tm up my_file.txt --token=stuffandstuffandstuff - Uploads "my_file.txt", using the token "stuffandstuffandstuff"
+    tm upload awesome.webm tag1 funny last_tag - Uploads "awesome.webm" with the tags "tag1, funny, last_tag"
+    tm upload my_file.txt --token=stuffandstuffandstuff - Uploads "my_file.txt", using the token "stuffandstuffandstuff"
+    tm search "my search term" - Searches for files that match "my search term"
+    tm tags find_this -exclude_this - Searches for files with the tag "find_this" and without the tag "-exclude_this"
     tm configure token mytoken_thing_stuff_this_is_really_long - Sets the configured token to "mytoken_thing_stuff_this_is_really_long"
     tm configure url https://tm.example.org - Sets the configured URL to "https://tm.example.org"
 """

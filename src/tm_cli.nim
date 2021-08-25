@@ -11,6 +11,7 @@ import tm_cli/private/commands/upload
 import tm_cli/private/commands/configure
 import tm_cli/private/commands/search
 import tm_cli/private/commands/tags
+import tm_cli/private/commands/delete
 
 proc main(): Future[void] {.async.} =
     let parsedArgs = parseArgs()
@@ -80,6 +81,14 @@ proc main(): Future[void] {.async.} =
         let page = if pageOp.isSome: pageOp.get.parseInt else: 1
 
         await tagsCommand(parsedArgs, tags, excludeTags, page)
+    elif action == "delete" or action == "d":
+        if args.len < 2:
+            echo "Must provide file ID"
+            system.quit(1)
+
+        let id = args[1]
+
+        await deleteCommand(parsedArgs, id)
     elif action == "help" or action == "h":
         echo HELP_STR
         system.quit(1)

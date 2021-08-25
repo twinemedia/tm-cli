@@ -1,10 +1,15 @@
+import tm_client
+import tm_client/private/objects as tm_objects
+
 import strformat
 import strutils
 import json
 import options
 import os
+import terminal
 
 import objects
+import constants
 
 proc slice*[T](s: seq[T], startIndex: int, endIndex: int): seq[T] =
     ## Takes a slice out of a sequence. Works the same way as JavaScript's array slice menthod
@@ -114,3 +119,23 @@ proc genStr*(c: char, len: int): string =
         str[i] = c
     
     return str
+
+proc printFileResults*(client: TMClient, res: seq[TMMedia], page: int = 1) =
+    ## Prints file results
+    
+    if res.len > 0:
+        let openMsg = if res.len >= PAGE_SIZE:
+            fmt"===== Returned {res.len} results - see next page with --page={page+1} ====="
+        else:
+            fmt"===== Returned {res.len} results ====="
+        echo openMsg
+        
+        for file in res:
+            writeStyled(fmt"{file.name} (Size: {formatSize(file.size)}, ID: {file.id})", { styleBright })
+            stdout.write(" - ")
+            writeStyled($client.idToDownloadUrl(file.id, file.filename), { styleItalic })
+            echo ""
+        
+        echo '='.genStr(openMsg.len)
+    else:
+        echo "No results"

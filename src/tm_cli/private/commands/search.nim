@@ -1,9 +1,7 @@
 import tm_client
 
 import asyncdispatch
-import strformat
 import strutils
-import terminal
 
 import ../objects
 import ../config
@@ -39,19 +37,4 @@ proc searchCommand*(args: Args, query: string, page: int = 1): Future[void] {.as
     )
 
     # Print results
-    if res.len > 0:
-        let openMsg = if res.len >= PAGE_SIZE:
-            fmt"===== Returned {res.len} results - see next page with --page={realPage+1} ====="
-        else:
-            fmt"===== Returned {res.len} results ====="
-        echo openMsg
-        
-        for file in res:
-            writeStyled(fmt"{file.name} ({formatSize(file.size)})", { styleBright })
-            stdout.write(" - ")
-            writeStyled($client.idToDownloadUrl(file.id, file.filename), { styleItalic })
-            echo ""
-        
-        echo '='.genStr(openMsg.len)
-    else:
-        echo "No results"
+    client.printFileResults(res, realPage)
