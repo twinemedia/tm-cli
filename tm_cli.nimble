@@ -12,4 +12,3 @@ namedBin["tm_cli"] = "tm"
 
 requires "nim >= 1.4.8"
 requires "tm_client >= 0.1.1"
-requires "commandant >= 0.15.0"
