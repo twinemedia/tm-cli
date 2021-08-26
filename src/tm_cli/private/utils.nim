@@ -38,10 +38,11 @@ proc slice*[T](s: seq[T], startIndex: int): seq[T] =
 proc filenameInPath*(path: string): string =
     ## Returns the filename in a path
     
-    let index = path.find('/')
+    let separator = when system.hostOS == "windows": '/' else: '\\'
+    let index = path.find(separator)
     
     if index > -1:
-        let parts = path.split('/')
+        let parts = path.split(separator)
         return parts[parts.len-1]
     else:
         return path
