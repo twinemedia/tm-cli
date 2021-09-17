@@ -2,7 +2,6 @@ import asyncdispatch
 import strformat
 import strutils
 import options
-import terminal
 
 import tm_cli/private/constants
 import tm_cli/private/utils
@@ -94,9 +93,6 @@ proc main(): Future[void] {.async.} =
         system.quit(1)
     else:
         echo fmt"Unknown action ""{action}"". Use ""--help"" to show available actions."
-
-# Remove terminal color attributes after
-system.addQuitProc(resetAttributes)
 
 # Run program
 when isMainModule:
