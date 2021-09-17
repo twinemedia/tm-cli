@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.1.1"
 author        = "Termer"
 description   = "A command line interface for interacting with TwineMedia"
 license       = "MIT"
