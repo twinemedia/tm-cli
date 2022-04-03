@@ -11,4 +11,4 @@ namedBin["tm_cli"] = "tm"
 # Dependencies
 
 requires "nim >= 1.4.8"
-requires "tm_client >= 0.1.2"
+requires "tm_client >= 0.1.4"
